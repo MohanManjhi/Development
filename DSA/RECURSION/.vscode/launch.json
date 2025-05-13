@@ -2,6 +2,75 @@
   "version": "0.2.0",
   "configurations": [
     {
+  "name": "Debug Current C++ File",
+  "type": "cppdbg",
+  "request": "launch",
+  "program": "${fileDirname}/build/${fileBasenameNoExtension}.exe",
+  "args": [],
+  "stopAtEntry": false,
+  "cwd": "${fileDirname}",
+  "environment": [],
+  "externalConsole": true,
+  "MIMode": "gdb",
+  "miDebuggerPath": "gdb",
+  "setupCommands": [
+    {
+      "description": "Enable pretty-printing for gdb",
+      "text": "-enable-pretty-printing",
+      "ignoreFailures": true
+    }
+  ],
+  "preLaunchTask": "build active file"
+}
+,
+
+    {
+      "name": "Attach to Chrome",
+      "port": 9222,
+      "request": "attach",
+      "type": "chrome",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "(gdb) Attach",
+      "type": "cppdbg",
+      "request": "attach",
+      "program": "enter program name, for example ${workspaceFolder}/a.exe",
+      "MIMode": "gdb",
+      "miDebuggerPath": "/path/to/gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        },
+        {
+          "description": "Set Disassembly Flavor to Intel",
+          "text": "-gdb-set disassembly-flavor intel",
+          "ignoreFailures": true
+        }
+      ]
+    },
+    {
+      "name": "C/C++ Runner: Debug Any File",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "cwd": "${workspaceFolder}",
+      "program": "${workspaceFolder}/build/Debug/${input:exeToRun}",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    },
+    {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",
@@ -19,6 +88,13 @@
           "ignoreFailures": true
         }
       ]
+    }
+  ],
+  "inputs": [
+    {
+      "id": "exeToRun",
+      "type": "promptString",
+      "description": "Enter executable file name (e.g., rec1.exe)"
     }
   ]
 }
